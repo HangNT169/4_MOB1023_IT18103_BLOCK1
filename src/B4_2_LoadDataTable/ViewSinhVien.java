@@ -2,22 +2,64 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package B3_OverviewSwing;
+package B4_2_LoadDataTable;
 
+import B1_B2_ReviewOOP.SinhVien;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author hangnt
  */
 public class ViewSinhVien extends javax.swing.JFrame {
+    
+    private DefaultTableModel dtm;
+    private List<NhanVien> listNhanViens;
 
     /**
      * Creates new form ViewSinhVien
      */
     public ViewSinhVien() {
         initComponents();
+        // Code chay luon, bat buoc phai viet o trong contructor va duoi init
+
+        // B1: Khoi tao instance ( khoi tao new )
+        dtm = new DefaultTableModel();
+        listNhanViens = new ArrayList<>();
+        tbHienThi.setModel(dtm);
+
+        // B2: Add phan tu vao list
+        loadDataMacDinh();
+
+        // B3: Custom header
+        String[] headers = {"Ten", "Loai", "Gioi tinh", "So thich"};
+        dtm.setColumnIdentifiers(headers);
+
+        // B4: Load data len table
+        showDataTable(listNhanViens);
+
+        // B5: Fill phan tu x len cac control tuong ung
+        fillPhanTu(0);
+        
+    }
+    
+    private void showDataTable(List<NhanVien> lists) {
+        for (NhanVien nv : lists) {
+            // add row
+            dtm.addRow(nv.toDataRow());
+        }
+    }
+    
+    private void loadDataMacDinh() {
+        listNhanViens.add(new NhanVien("ten1", "loai1", true, "sothich1"));
+        listNhanViens.add(new NhanVien("ten2", "loai3", true, "sothich2"));
+        listNhanViens.add(new NhanVien("ten3", "loai4", false, "sothic2"));
+        listNhanViens.add(new NhanVien("ten4", "loai5", false, "sothich3"));
+        listNhanViens.add(new NhanVien("ten5", "loai2", true, "sothich5"));
     }
 
     /**
@@ -72,6 +114,11 @@ public class ViewSinhVien extends javax.swing.JFrame {
                 "Tên", "Loại", "Giới tính", "Sở thich"
             }
         ));
+        tbHienThi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbHienThiMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbHienThi);
 
         cbLan.setText("Lăn");
@@ -208,6 +255,17 @@ public class ViewSinhVien extends javax.swing.JFrame {
         buttonGroup1.clearSelection();
     }//GEN-LAST:event_btnClearActionPerformed
 
+    private void tbHienThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHienThiMouseClicked
+        int row = tbHienThi.getSelectedRow();
+        fillPhanTu(row);
+    }//GEN-LAST:event_tbHienThiMouseClicked
+    
+    private void fillPhanTu(int row) {
+        NhanVien nv = listNhanViens.get(row);
+        txtName.setText(nv.getTen());
+        // cac control con lai tu lam
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +291,7 @@ public class ViewSinhVien extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
