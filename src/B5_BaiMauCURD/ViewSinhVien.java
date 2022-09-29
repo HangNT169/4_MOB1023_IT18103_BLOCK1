@@ -271,6 +271,10 @@ public class ViewSinhVien extends javax.swing.JFrame {
         } else {
             gt = 2;
         }
+        if(tenSV.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Khong duoc de trong ten");
+            return;
+        }
         if (tenSV.matches("[a-z A-Z]+") == false) {
             JOptionPane.showMessageDialog(this, "Ten k dung dinh dang");
         } else if (tuoi.matches("\\d+") == false) {
