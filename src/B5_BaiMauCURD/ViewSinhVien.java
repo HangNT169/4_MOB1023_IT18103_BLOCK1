@@ -6,6 +6,7 @@ package B5_BaiMauCURD;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -258,6 +259,7 @@ public class ViewSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // https://o7planning.org/10175/java-regular-expression
         String maSV = txtMaSV.getText();
         String tenSV = txtTen.getText();
         String tuoi = txtTuoi.getText();
@@ -269,10 +271,15 @@ public class ViewSinhVien extends javax.swing.JFrame {
         } else {
             gt = 2;
         }
-
-        SinhVien sv = new SinhVien(maSV, tenSV, Integer.valueOf(tuoi), gt, "Ha noi");
-        listSinhVien.add(sv);
-        showDataTable(listSinhVien);
+        if (tenSV.matches("[a-z A-Z]+") == false) {
+            JOptionPane.showMessageDialog(this, "Ten k dung dinh dang");
+        } else if (tuoi.matches("\\d+") == false) {
+            JOptionPane.showMessageDialog(this, "Tuoi k dung dinh dang");
+        } else {
+            SinhVien sv = new SinhVien(maSV, tenSV, Integer.valueOf(tuoi), gt, "Ha noi");
+            listSinhVien.add(sv);
+            showDataTable(listSinhVien);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     /**
