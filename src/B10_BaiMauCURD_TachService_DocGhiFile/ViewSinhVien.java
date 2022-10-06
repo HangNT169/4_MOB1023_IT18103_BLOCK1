@@ -2,8 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package B5_BaiMauCURD;
-
+package B10_BaiMauCURD_TachService_DocGhiFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +17,7 @@ public class ViewSinhVien extends javax.swing.JFrame {
 
     private DefaultTableModel dtm;
     private List<SinhVien> listSinhVien;
+    private String path = "test.txt";
 
     /**
      * Creates new form ViewSinhVien
@@ -31,12 +31,12 @@ public class ViewSinhVien extends javax.swing.JFrame {
         String[] headers = {"Ma SV", "Ten", "Tuoi", "Gioi Tinh", "Dia chi"};
         dtm.setColumnIdentifiers(headers);
 
-        listSinhVien.add(new SinhVien("M01", "Nguyen Thuy Hang", 10, 1, "Ha noi"));
-        listSinhVien.add(new SinhVien("M02", "Tran Tuan Phong", 11, 2, "Ha noi1"));
-        listSinhVien.add(new SinhVien("M03", "Nguyen Anh Dung", 12, 1, "Ha no2"));
-        listSinhVien.add(new SinhVien("M04", "Nguyen Hoang Tien", 13, 2, "Ha noi3"));
-        listSinhVien.add(new SinhVien("M05", "Vu Van Nguyen", 14, 2, "Ha no4"));
-        showDataTable(listSinhVien);
+//        listSinhVien.add(new SinhVien("M01", "Nguyen Thuy Hang", 10, 1, "Ha noi"));
+//        listSinhVien.add(new SinhVien("M02", "Tran Tuan Phong", 11, 2, "Ha noi1"));
+//        listSinhVien.add(new SinhVien("M03", "Nguyen Anh Dung", 12, 1, "Ha no2"));
+//        listSinhVien.add(new SinhVien("M04", "Nguyen Hoang Tien", 13, 2, "Ha noi3"));
+//        listSinhVien.add(new SinhVien("M05", "Vu Van Nguyen", 14, 2, "Ha no4"));
+//        showDataTable(listSinhVien);
 
     }
 
@@ -78,6 +78,8 @@ public class ViewSinhVien extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbHienThi = new javax.swing.JTable();
+        btnDocFile = new javax.swing.JButton();
+        btnGhiFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +116,11 @@ public class ViewSinhVien extends javax.swing.JFrame {
         });
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xoá");
 
@@ -141,6 +148,20 @@ public class ViewSinhVien extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbHienThi);
 
+        btnDocFile.setText("Đọc file");
+        btnDocFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDocFileActionPerformed(evt);
+            }
+        });
+
+        btnGhiFile.setText("Ghi file");
+        btnGhiFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGhiFileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,32 +184,33 @@ public class ViewSinhVien extends javax.swing.JFrame {
                                         .addComponent(btnThoat))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel4)
-                                            .addGap(47, 47, 47)
-                                            .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(rdNam)
-                                                .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(47, 47, 47)
+                                        .addComponent(txtSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(78, 78, 78))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnXoa)
+                                        .addGap(89, 89, 89)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSapXep)
+                                    .addComponent(btnSearch))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(47, 47, 47)
+                                        .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addGap(47, 47, 47)
-                                                .addComponent(txtSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(78, 78, 78))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(btnXoa)
-                                                .addGap(89, 89, 89)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnSapXep)
-                                            .addComponent(btnSearch))))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                            .addComponent(rdNam)
+                                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDocFile))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,6 +223,11 @@ public class ViewSinhVien extends javax.swing.JFrame {
                                 .addComponent(btnSua))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(631, Short.MAX_VALUE)
+                    .addComponent(btnGhiFile)
+                    .addGap(28, 28, 28)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,11 +247,17 @@ public class ViewSinhVien extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDocFile)
+                        .addGap(47, 47, 47)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(rdNam)
@@ -236,11 +269,16 @@ public class ViewSinhVien extends javax.swing.JFrame {
                     .addComponent(btnXoa)
                     .addComponent(btnSapXep)
                     .addComponent(btnThoat))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(321, 321, 321)
+                    .addComponent(btnGhiFile)
+                    .addContainerGap(549, Short.MAX_VALUE)))
         );
 
         pack();
@@ -272,7 +310,7 @@ public class ViewSinhVien extends javax.swing.JFrame {
         } else {
             gt = 2;
         }
-        if(tenSV.isEmpty()){
+        if (tenSV.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong ten");
             return;
         }
@@ -286,6 +324,34 @@ public class ViewSinhVien extends javax.swing.JFrame {
             showDataTable(listSinhVien);
         }
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnGhiFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGhiFileActionPerformed
+        String thongBao = new SinhVienService().ghiFile(path, listSinhVien);
+        JOptionPane.showMessageDialog(this, thongBao);
+    }//GEN-LAST:event_btnGhiFileActionPerformed
+
+    private void btnDocFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocFileActionPerformed
+        String thongBao = new SinhVienService().docFile(path, listSinhVien);
+        JOptionPane.showMessageDialog(this, thongBao);
+        showDataTable(listSinhVien);
+    }//GEN-LAST:event_btnDocFileActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        int row = tbHienThi.getSelectedRow();
+        SinhVien sv = listSinhVien.get(row);
+        
+        // lay thong tin moi tu form 
+        String name = txtTen.getText();
+        String maSV = txtMaSV.getText();
+        
+        // xet lai doi tuong
+        sv.setMaSV(maSV);
+        sv.setTen(name);
+        
+        // set lai vao list
+        listSinhVien.set(row, sv);
+        showDataTable(listSinhVien);
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,6 +390,8 @@ public class ViewSinhVien extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDocFile;
+    private javax.swing.JButton btnGhiFile;
     private javax.swing.JButton btnSapXep;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSua;
